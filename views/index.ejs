@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telefonski Imenik</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Ako imate dodatne stilove -->
 </head>
 <body>
     <%- include('header') %>
-    <div class="container">
-        <h1 class="mt-4 mb-4">Telefonski Imenik Ambasada</h1>
-        <% Object.keys(groupedUsers).forEach((ambasada_broj) => { %>
-            <h2><%= ambasada_broj %> <%= groupedUsers[ambasada_broj].ambasada %></h2>
+    <div class="container mt-4">
+        <h1 class="mb-4">Telefonski Imenik Ambasada</h1>
+        <% if (isAdmin) { %>
+            <a href="/add" class="btn btn-success mb-4">Dodaj Novog Korisnika</a>
+        <% } %>
+        <% Object.keys(groupedUsers).forEach(ambasada_broj => { %>
+            <h2><%= groupedUsers[ambasada_broj].ambasada %> (Broj: <%= ambasada_broj %>)</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -20,21 +26,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% groupedUsers[ambasada_broj].users.forEach((entry) => { %>
-                    <tr>
-                        <td><%= entry.ime_prezime %></td>
-                        <td><%= entry.funkcija %></td>
-                        <td><%= entry.lokal %></td>
-                        <td>
-                            <a href="/edit/<%= entry.id %>" class="btn btn-primary btn-sm">Uredi</a>
-                            <a href="/delete/<%= entry.id %>" class="btn btn-danger btn-sm">Obriši</a>
-                        </td>
-                    </tr>
+                    <% groupedUsers[ambasada_broj].users.forEach(entry => { %>
+                        <tr>
+                            <td><%= entry.ime_prezime %></td>
+                            <td><%= entry.funkcija %></td>
+                            <td><%= entry.lokal %></td>
+                            <td>
+                                <% if (isAdmin) { %>
+                                    <a href="/edit/<%= entry.id %>" class="btn btn-primary btn-sm">Uredi</a>
+                                    <a href="/delete/<%= entry.id %>" class="btn btn-danger btn-sm">Obriši</a>
+                                <% } %>
+                            </td>
+                        </tr>
                     <% }); %>
                 </tbody>
             </table>
         <% }); %>
-        <a href="/add" class="btn btn-success">Dodaj Novog Korisnika</a>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
