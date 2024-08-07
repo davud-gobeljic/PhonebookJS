@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj Novog Korisnika</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">Dodaj Novog Korisnika</h1>
+        <form action="/add" method="post">
+            <div class="form-group">
+                <label for="ambasada_broj">Izaberite Ambasadu:</label>
+                <select id="ambasada_broj" name="ambasada_broj" class="form-control" required>
+                    <% ambasade.forEach(ambasada => { %>
+                        <option value="<%= ambasada.broj %>"><%= ambasada.broj %> <%= ambasada.naziv %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ime_prezime">Ime i Prezime:</label>
+                <input type="text" id="ime_prezime" name="ime_prezime" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="funkcija">Funkcija:</label>
+                <input type="text" id="funkcija" name="funkcija" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lokal">Lokal:</label>
+                <input type="text" id="lokal" name="lokal" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Dodaj Korisnika</button>
+        </form>
+        
+        <h2 class="mt-5">Dodaj Novu Ambasadu</h2>
+        <form action="/add-ambasada" method="post">
+            <div class="form-group">
+                <label for="novi_ambasada_broj">Broj Ambasade:</label>
+                <input type="number" id="novi_ambasada_broj" name="novi_ambasada_broj" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="novi_ambasada_naziv">Naziv Ambasade:</label>
+                <input type="text" id="novi_ambasada_naziv" name="novi_ambasada_naziv" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Dodaj Ambasadu</button>
+        </form>
+        
+        <a href="/" class="btn btn-secondary mt-3">Nazad</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

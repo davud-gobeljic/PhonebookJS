@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telefonski Imenik</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">Telefonski Imenik Ambasada</h1>
+        <% Object.keys(groupedUsers).forEach((ambasada_broj) => { %>
+            <h2><%= ambasada_broj %> <%= groupedUsers[ambasada_broj].ambasada %></h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Ime i Prezime</th>
+                        <th scope="col">Funkcija</th>
+                        <th scope="col">Lokal</th>
+                        <th scope="col">Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% groupedUsers[ambasada_broj].users.forEach((entry) => { %>
+                    <tr>
+                        <td><%= entry.ime_prezime %></td>
+                        <td><%= entry.funkcija %></td>
+                        <td><%= entry.lokal %></td>
+                        <td>
+                            <a href="/edit/<%= entry.id %>" class="btn btn-primary btn-sm">Uredi</a>
+                            <a href="/delete/<%= entry.id %>" class="btn btn-danger btn-sm">Obriši</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% }); %>
+        <a href="/add" class="btn btn-success">Dodaj Novog Korisnika</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

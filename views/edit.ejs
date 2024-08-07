@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= entry ? 'Uredi Korisnika' : 'Dodaj Novog Korisnika' %></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4"><%= entry ? 'Uredi Korisnika' : 'Dodaj Novog Korisnika' %></h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="ambasada_broj">Broj Ambasade:</label>
+                <input type="text" class="form-control" id="ambasada_broj" name="ambasada_broj" value="<%= entry ? entry.ambasada_broj : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="ambasada">Ambasada:</label>
+                <input type="text" class="form-control" id="ambasada" name="ambasada" value="<%= entry ? entry.ambasada : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="ime_prezime">Ime i Prezime:</label>
+                <input type="text" class="form-control" id="ime_prezime" name="ime_prezime" value="<%= entry ? entry.ime_prezime : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="funkcija">Funkcija:</label>
+                <input type="text" class="form-control" id="funkcija" name="funkcija" value="<%= entry ? entry.funkcija : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="lokal">Lokal:</label>
+                <input type="text" class="form-control" id="lokal" name="lokal" value="<%= entry ? entry.lokal : '' %>">
+            </div>
+            <button type="submit" class="btn btn-primary">Spremi</button>
+        </form>
+        <a href="/" class="btn btn-secondary mt-4">Nazad</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

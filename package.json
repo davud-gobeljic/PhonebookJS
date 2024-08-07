@@ -1,0 +1,18 @@
+{
+    "name": "phonebook-app",
+    "version": "1.0.0",
+    "description": "A simple phonebook app using Node.js and Express",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.20.2",
+        "ejs": "^3.1.10",
+        "express": "^4.19.2",
+        "sqlite3": "^5.1.7"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
