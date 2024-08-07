@@ -45,18 +45,47 @@
             width: 100%;
             bottom: 0;
         }
+        .navbar-text {
+            font-size: 1.2rem;
+            text-align: center;
+            width: 100%;
+        }
+        .navbar-brand i {
+            margin-right: 5px; /* Razmak između ikone i teksta */
+        }
+        .navbar-nav {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .navbar-brand {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.navbar-brand i {
+    margin-right: 10px; /* Razmak između ikone i teksta */
+}
+
+.navbar-text {
+    font-size: 1rem; /* Prilagodite veličinu fonta po potrebi */
+}
+
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Telefonski Imenik</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-address-book"></i> <!-- Ikonica imenika -->
+        </a>
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <!-- Ostatak navigacije -->
             </ul>
+            <span class="navbar-text mx-auto">
+                <strong>INTERNI TELEFONSKI IMENIK MINISTARSTVA VANJSKIH POSLOVA BOSNE I HERCEGOVINE</strong>
+            </span>
             <% if (isAdmin) { %>
                 <a href="/add" class="btn btn-success mr-2">Dodaj Novog Korisnika</a>
             <% } %>
