@@ -1,22 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">
         <i class="fas fa-address-book"></i> <!-- Ikonica imenika -->
-        Interni Telefonski Imenik Ministarstva Vanjskih Poslova
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-            <!-- Ostatak navigacije -->
+            <!-- Dodajte linkove za lokacije i organizaciju -->
+            <li class="nav-item">
+                <a class="nav-link" href="/current-page">Trenutna Stranica</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lokali">Lokali</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/organizacija">Organizacija</a>
+            </li>
         </ul>
+        <span class="navbar-text mx-auto">
+            <strong>Interni Telefonski Imenik Ministarstva Vanjskih Poslova</strong>
+        </span>
         <% if (isAdmin) { %>
-            <a href="/add" class="btn btn-success ml-2">Dodaj Novog Korisnika</a>
+            <a href="/add" class="btn btn-success">Dodaj Novog Korisnika</a>
         <% } %>
         <% if (req.session && req.session.user) { %>
-            <a href="/logout" class="btn btn-danger ml-2">Odjavi se</a>
+            <a href="/logout" class="btn btn-danger">Odjavi se</a>
         <% } else { %>
-            <a href="/login" class="btn btn-primary ml-2">Prijavi se</a>
+            <a href="/login" class="btn btn-primary">Prijavi se</a>
         <% } %>
     </div>
 </nav>

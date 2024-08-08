@@ -15,10 +15,46 @@
             background-color: #f8f9fa;
         }
         .navbar {
+            background-color: #343a40; /* Tamno siva pozadina */
+            border-bottom: 2px solid #495057; /* Siva donja granica */
             margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Blaga sjenka */
         }
-        .table-hover tbody tr:hover {
-            background-color: #f1f1f1;
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand i {
+            margin-right: 10px;
+            color: #ffc107; /* Zlatna boja ikone */
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff; /* Bijela boja teksta za linkove */
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffc107; /* Zlatna boja teksta na hover */
+            background-color: rgba(255, 255, 255, 0.1); /* Blaga pozadina na hover */
+            border-radius: 4px; /* Zaobljeni uglovi na hover */
+        }
+        .navbar-text {
+            color: #ffffff; /* Bijela boja teksta u sredini */
+            font-size: 1.2rem;
+        }
+        .btn-success, .btn-danger, .btn-primary {
+            border-radius: 20px; /* Zaobljeni uglovi dugmadi */
+        }
+        .btn-success {
+            background-color: #28a745; /* Zeleno dugme */
+            border-color: #28a745;
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Crveno dugme */
+            border-color: #dc3545;
+        }
+        .btn-primary {
+            background-color: #007bff; /* Plavo dugme */
+            border-color: #007bff;
         }
         .container {
             flex: 1;
@@ -45,43 +81,24 @@
             width: 100%;
             bottom: 0;
         }
-        .navbar-text {
-            font-size: 1.2rem;
-            text-align: center;
-            width: 100%;
-        }
-        .navbar-brand i {
-            margin-right: 5px; /* Razmak između ikone i teksta */
-        }
-        .navbar-nav {
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        .navbar-brand {
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-
-.navbar-brand i {
-    margin-right: 10px; /* Razmak između ikone i teksta */
-}
-
-.navbar-text {
-    font-size: 1rem; /* Prilagodite veličinu fonta po potrebi */
-}
-
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">
             <i class="fas fa-address-book"></i> <!-- Ikonica imenika -->
         </a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <!-- Ostatak navigacije -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/current-page">Trenutna Stranica</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/lokali">Lokali</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/organizacija">Organizacija</a>
+                </li>
             </ul>
             <span class="navbar-text mx-auto">
                 <strong>INTERNI TELEFONSKI IMENIK MINISTARSTVA VANJSKIH POSLOVA BOSNE I HERCEGOVINE</strong>
@@ -139,7 +156,7 @@
 
     <footer class="footer">
         <div class="container">
-            <span>&copy; 2024 Telefonski Imenik. Sva prava zadržana.</span>
+            <span>&copy; 2024 Telefonski Imenik</span>
         </div>
     </footer>
 
