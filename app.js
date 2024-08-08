@@ -3,11 +3,6 @@ const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
-const helmet = require('helmet');
-const csrf = require('csurf');
-const validator = require('validator');
-require('dotenv').config();
-
 const { isAdmin } = require('./middleware/auth');
 
 const app = express();
@@ -29,18 +24,13 @@ db.serialize(() => {
 
 // Postavljanje middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'your-very-secure-secret-key',
+    secret: 'your-secret-key',
     resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false } // Set to true if using HTTPS
+    saveUninitialized: true
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Middleware za zaštitu
-app.use(helmet());
-app.use(csrf());
 
 // Middleware za proveru da li je korisnik admin
 function checkAdmin(req, res, next) {
@@ -64,26 +54,20 @@ app.get('/', (req, res) => {
       return acc;
     }, {});
 
-    // Dodavanje req, isAdmin i csrfToken u kontekst za EJS
-    res.render('index', { req, groupedUsers, isAdmin: res.locals.isAdmin, csrfToken: req.csrfToken() });
+    // Dodavanje req i isAdmin u kontekst za EJS
+    res.render('index', { req, groupedUsers, isAdmin: res.locals.isAdmin });
   });
 });
 
+
 app.get('/add', isAdmin, (req, res) => {
-  res.render('edit', { entry: null, csrfToken: req.csrfToken() });
+  res.render('edit', { entry: null });
 });
 
 app.post('/add', isAdmin, (req, res) => {
   const { ambasada_broj, ambasada, ime_prezime, funkcija, lokal } = req.body;
-
-  // Sanitizacija unosa
-  const sanitizedAmbasada = validator.escape(ambasada);
-  const sanitizedImePrezime = validator.escape(ime_prezime);
-  const sanitizedFunkcija = validator.escape(funkcija);
-  const sanitizedLokal = validator.escape(lokal);
-
   db.run(`INSERT INTO users (ambasada_broj, ambasada, ime_prezime, funkcija, lokal) VALUES (?, ?, ?, ?, ?)`,
-    [ambasada_broj, sanitizedAmbasada, sanitizedImePrezime, sanitizedFunkcija, sanitizedLokal],
+    [ambasada_broj, ambasada, ime_prezime, funkcija, lokal],
     (err) => {
       if (err) {
         throw err;
@@ -99,22 +83,15 @@ app.get('/edit/:id', isAdmin, (req, res) => {
     if (err) {
       throw err;
     }
-    res.render('edit', { entry: row, csrfToken: req.csrfToken() });
+    res.render('edit', { entry: row });
   });
 });
 
 app.post('/edit/:id', isAdmin, (req, res) => {
   const id = req.params.id;
   const { ambasada_broj, ambasada, ime_prezime, funkcija, lokal } = req.body;
-
-  // Sanitizacija unosa
-  const sanitizedAmbasada = validator.escape(ambasada);
-  const sanitizedImePrezime = validator.escape(ime_prezime);
-  const sanitizedFunkcija = validator.escape(funkcija);
-  const sanitizedLokal = validator.escape(lokal);
-
   db.run(`UPDATE users SET ambasada_broj = ?, ambasada = ?, ime_prezime = ?, funkcija = ?, lokal = ? WHERE id = ?`,
-    [ambasada_broj, sanitizedAmbasada, sanitizedImePrezime, sanitizedFunkcija, sanitizedLokal, id],
+    [ambasada_broj, ambasada, ime_prezime, funkcija, lokal, id],
     (err) => {
       if (err) {
         throw err;
@@ -136,7 +113,7 @@ app.get('/delete/:id', isAdmin, (req, res) => {
 
 // Logovanje i odjavljivanje
 app.get('/login', (req, res) => {
-  res.render('login', { csrfToken: req.csrfToken() });
+  res.render('login');
 });
 
 app.post('/login', (req, res) => {
@@ -152,12 +129,6 @@ app.post('/login', (req, res) => {
 app.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
-});
-
-// Centralizovana obrada grešaka
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
 });
 
 app.listen(port, () => {
